@@ -12,6 +12,7 @@ namespace hk::sdl {
 class Surface {
  public:
   Surface(SDL_Surface* surface);
+  Surface(SDL_Surface* surface, no_logging_tag_t);
 
   ~Surface();
 
@@ -25,6 +26,7 @@ class Surface {
 
  private:
   SDL_Surface* m_surface;
+  bool m_log;
 };
 }  // namespace hk::sdl
 

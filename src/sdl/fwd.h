@@ -2,6 +2,8 @@
 #define SDL_WRAPPER_FWD_H
 
 namespace hk::sdl {
+struct no_logging_tag_t;
+
 class Color;
 class Rectangle;
 

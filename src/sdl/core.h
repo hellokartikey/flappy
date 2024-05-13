@@ -1,11 +1,11 @@
 #ifndef SDL_WRAPPER_CORE_H
 #define SDL_WRAPPER_CORE_H
 
-#include "global.h"
 #include "color.h"
 #include "event.h"
 #include "font.h"
 #include "fwd.h"
+#include "global.h"
 #include "math.h"
 #include "rectangle.h"
 #include "renderer.h"

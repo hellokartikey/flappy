@@ -11,6 +11,7 @@ namespace hk::sdl {
 class Texture {
  public:
   Texture(Renderer& renderer, Surface& surface);
+  Texture(Renderer& renderer, Surface& surface, no_logging_tag_t);
 
   ~Texture();
 
@@ -20,6 +21,7 @@ class Texture {
 
  private:
   SDL_Texture* m_texture;
+  bool m_log;
 };
 }  // namespace hk::sdl
 

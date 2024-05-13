@@ -8,11 +8,11 @@
 #include "fwd.h"
 
 namespace hk::sdl {
-class SDL_ttf {
+class TTF {
  public:
-  SDL_ttf();
+  TTF();
 
-  ~SDL_ttf();
+  ~TTF();
 };
 }  // namespace hk::sdl
 

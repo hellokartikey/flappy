@@ -5,6 +5,7 @@
 #include "color.h"
 #include "logger.h"
 #include "surface.h"
+#include "global.h"
 
 using namespace hk::sdl;
 
@@ -38,5 +39,5 @@ Font::operator TTF_Font*() { return m_font; }
 
 auto Font::renderTextSolid(const std::string_view& text,
                            const Color& color) -> Surface {
-  return Surface{TTF_RenderText_Solid(*this, text.data(), color)};
+  return Surface{TTF_RenderText_Solid(*this, text.data(), color), no_logging_tag};
 }

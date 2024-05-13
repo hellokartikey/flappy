@@ -1,8 +1,8 @@
-#include <chrono>
-#include <thread>
-
 #include <fmt/core.h>
 #include <fmt/ostream.h>
+
+#include <chrono>
+#include <thread>
 
 #include "sdl/core.h"
 
@@ -12,27 +12,27 @@ using namespace hk::math;
 using namespace std::chrono_literals;
 
 auto main() -> int {
-  auto sdl = SDL(SDL::VIDEO);
-  auto ttf = SDL_ttf();
-  auto font = Font("Square.ttf", 24);
+  auto sdl = SDL{SDL::VIDEO};
+  auto ttf = TTF{};
+  auto font = Font{"Square.ttf", 24};
   auto window = Window("[DEMO] Flappy Bird :)", {640, 480});
-  auto renderer = Renderer(window);
+  auto renderer = Renderer{window};
   auto event = Event{};
 
   auto fps = 0s;
 
   bool quit = false;
   while (quit == false) {
-    auto start = getTicks();
+    auto wait_time = std::chrono::system_clock::now() + 50ms;
 
-    auto wait_time = std::chrono::system_clock::now() + 16ms;
+    auto start = getTicks();
 
     renderer.clear();
 
     // Begin rendering stuff
-    auto text =
-        font.renderTextSolid(fmt::format("{}fps", fps.count()), {0x00, 0x00, 0x00});
-    auto text_texture = Texture(renderer, text);
+    auto text = font.renderTextSolid(fmt::format("{}fps", fps.count()),
+                                     {0x00, 0x00, 0x00});
+    auto text_texture = Texture(renderer, text, no_logging_tag);
 
     auto dst = Rectangle{0, 0, text.w(), text.h()};
 
@@ -50,7 +50,6 @@ auto main() -> int {
     }
 
     std::this_thread::sleep_until(wait_time);
-
     auto delta = getTicks() - start;
     fps = std::chrono::seconds(1s / delta);
   }

@@ -8,7 +8,11 @@
 #include "fwd.h"
 
 namespace hk::sdl {
+struct no_logging_tag_t {};
+
+const no_logging_tag_t no_logging_tag;
+
 auto getTicks() -> std::chrono::milliseconds;
-}
+}  // namespace hk::sdl
 
 #endif

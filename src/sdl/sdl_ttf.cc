@@ -4,7 +4,7 @@
 
 using namespace hk::sdl;
 
-SDL_ttf::SDL_ttf() {
+TTF::TTF() {
   if (TTF_Init()) {
     throw std::runtime_error(TTF_GetError());
   }
@@ -12,7 +12,7 @@ SDL_ttf::SDL_ttf() {
   hk::logger::ctor("TTF_Init() successful.");
 }
 
-SDL_ttf::~SDL_ttf() {
+TTF::~TTF() {
   TTF_Quit();
 
   hk::logger::dtor("TTF_Quit() successful.");
