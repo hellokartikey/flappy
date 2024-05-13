@@ -8,19 +8,22 @@
 #include <string>
 #include <string_view>
 
+#include "entity.h"
 #include "fwd.h"
 
 namespace hk::sdl {
 const std::string FONT_PREFIX{FONT};
 
-class Font {
+class Font : public Entity {
  public:
-  Font(const std::string_view& name, std::int32_t size);
-  Font(TTF_Font* font);
+  Font(const std::string_view& name);
 
   ~Font();
 
   auto getFilePath() const -> std::string;
+
+  auto size() const -> std::int32_t;
+  auto setSize(std::int32_t size) -> void;
 
   auto get() -> TTF_Font*;
 

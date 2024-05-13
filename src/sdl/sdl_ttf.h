@@ -4,11 +4,13 @@
 #include <SDL2/SDL_ttf.h>
 
 #include <stdexcept>
+#include <string_view>
 
+#include "entity.h"
 #include "fwd.h"
 
 namespace hk::sdl {
-class TTF {
+class TTF : public Entity {
  public:
   TTF();
 

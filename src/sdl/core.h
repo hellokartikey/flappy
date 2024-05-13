@@ -6,6 +6,7 @@
 #include "font.h"
 #include "fwd.h"
 #include "global.h"
+#include "loader.h"
 #include "math.h"
 #include "rectangle.h"
 #include "renderer.h"

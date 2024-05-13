@@ -7,6 +7,9 @@ struct no_logging_tag_t;
 class Color;
 class Rectangle;
 
+class Entity;
+class Loader;
+
 class SDL;
 class Window;
 class Renderer;
@@ -15,7 +18,7 @@ class Texture;
 
 class Event;
 
-class SDL_ttf;
+class TTF;
 class Font;
 }  // namespace hk::sdl
 

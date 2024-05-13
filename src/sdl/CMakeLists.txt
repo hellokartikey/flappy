@@ -7,6 +7,8 @@ target_sources(
   PRIVATE core.h
   PRIVATE fwd.h
   PRIVATE logger.h
+  PRIVATE entity.h    PRIVATE entity.cc
+  PRIVATE loader.h    PRIVATE loader.cc
   PRIVATE sdl.h       PRIVATE sdl.cc
   PRIVATE renderer.h  PRIVATE renderer.cc
   PRIVATE window.h    PRIVATE window.cc

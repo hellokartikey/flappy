@@ -6,10 +6,11 @@
 #include <cstdint>
 #include <stdexcept>
 
+#include "entity.h"
 #include "fwd.h"
 
 namespace hk::sdl {
-class SDL {
+class SDL : public Entity {
  public:
   enum Flag {
     TIMER = SDL_INIT_TIMER,

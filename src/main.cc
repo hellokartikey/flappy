@@ -12,9 +12,10 @@ using namespace hk::math;
 using namespace std::chrono_literals;
 
 auto main() -> int {
-  auto sdl = SDL{SDL::VIDEO};
-  auto ttf = TTF{};
-  auto font = Font{"Square.ttf", 24};
+  auto sdl = Loader::loadSDL(SDL::VIDEO);
+  auto ttf = Loader::loadTTF();
+
+  auto font = Loader::loadFont("Square.ttf");
   auto window = Window("[DEMO] Flappy Bird :)", {640, 480});
   auto renderer = Renderer{window};
   auto event = Event{};
@@ -30,8 +31,8 @@ auto main() -> int {
     renderer.clear();
 
     // Begin rendering stuff
-    auto text = font.renderTextSolid(fmt::format("{}fps", fps.count()),
-                                     {0x00, 0x00, 0x00});
+    auto text = font->renderTextSolid(fmt::format("{}fps", fps.count()),
+                                      {0x00, 0x00, 0x00});
     auto text_texture = Texture(renderer, text, no_logging_tag);
 
     auto dst = Rectangle{0, 0, text.w(), text.h()};
