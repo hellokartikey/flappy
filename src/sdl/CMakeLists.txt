@@ -14,10 +14,17 @@ target_sources(
   PRIVATE texture.h   PRIVATE texture.cc
   PRIVATE sdl_ttf.h   PRIVATE sdl_ttf.cc
   PRIVATE font.h      PRIVATE font.cc
+  PRIVATE global.h    PRIVATE global.cc
   PRIVATE color.h     PRIVATE color.cc
   PRIVATE rectangle.h PRIVATE rectangle.cc
   PRIVATE event.h     PRIVATE event.cc
   PRIVATE math.h
+)
+
+target_compile_definitions(
+  sdl_wrapper
+  PUBLIC RESOURCE="${RESOURCE}"
+  PUBLIC FONT="${FONT}"
 )
 
 target_link_libraries(

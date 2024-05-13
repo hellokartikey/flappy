@@ -5,17 +5,22 @@
 
 #include <cstdint>
 #include <stdexcept>
+#include <string>
 #include <string_view>
 
 #include "fwd.h"
 
 namespace hk::sdl {
+const std::string FONT_PREFIX{FONT};
+
 class Font {
  public:
   Font(const std::string_view& name, std::int32_t size);
   Font(TTF_Font* font);
 
   ~Font();
+
+  auto getFilePath() const -> std::string;
 
   auto get() -> TTF_Font*;
 

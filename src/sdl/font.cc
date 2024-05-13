@@ -1,5 +1,7 @@
 #include "font.h"
 
+#include <array>
+
 #include "color.h"
 #include "logger.h"
 #include "surface.h"
@@ -8,7 +10,7 @@ using namespace hk::sdl;
 
 Font::Font(const std::string_view& name, std::int32_t size)
     : m_name(name), m_size(size) {
-  m_font = TTF_OpenFont(m_name.data(), m_size);
+  m_font = TTF_OpenFont(getFilePath().data(), m_size);
 
   if (m_font == nullptr) {
     throw std::runtime_error(TTF_GetError());
@@ -24,6 +26,10 @@ Font::Font(TTF_Font* font) : m_font(font) {
 Font::~Font() {
   TTF_CloseFont(m_font);
   hk::logger::dtor("TTF_CloseFont() closing {} successful.", m_name);
+}
+
+auto Font::getFilePath() const -> std::string {
+  return FONT_PREFIX + std::string(m_name);
 }
 
 auto Font::get() -> TTF_Font* { return m_font; }

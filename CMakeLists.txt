@@ -14,12 +14,9 @@ find_package(SDL2_image REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 find_package(fmt REQUIRED)
 
-add_executable(flappy)
+set(RESOURCE "${CMAKE_CURRENT_SOURCE_DIR}/resources/")
+set(FONT "${CMAKE_CURRENT_SOURCE_DIR}/resources/fonts/")
 
-target_compile_definitions(
-  flappy
-  PUBLIC RESOURCE="${CMAKE_CURRENT_SOURCE_DIR}/resources/"
-  PUBLIC FONT="${CMAKE_CURRENT_SOURCE_DIR}/resources/fonts/"
-)
+add_executable(flappy)
 
 add_subdirectory(src)
