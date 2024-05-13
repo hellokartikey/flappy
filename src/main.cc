@@ -7,22 +7,23 @@ using namespace hk::sdl;
 using namespace hk::math;
 
 auto main() -> int {
-  SDL sdl(init::VIDEO);
-  SDL_ttf ttf;
+  auto sdl = SDL(SDL::VIDEO);
+  auto ttf = SDL_ttf();
 
-  Font font(RESOURCE "/fonts/Square.ttf", 24);
+  auto font = Font(FONT "Square.ttf", 24);
 
-  Window window("[DEMO] Flappy Bird :)", {640, 480});
-  Renderer renderer(window);
+  auto window = Window("[DEMO] Flappy Bird :)", {640, 480});
+  auto renderer = Renderer(window);
 
-  Surface text = font.renderTextSolid("60fps", {0x00, 0x00, 0x00});
-  Texture text_texture(renderer, text);
+  auto text = font.renderTextSolid("60fps", {0x00, 0x00, 0x00});
+  auto text_texture = Texture(renderer, text);
 
-  Rectangle dst{0, 0, text.w(), text.h()};
+  auto dst = Rectangle{0, 0, text.w(), text.h()};
 
   renderer.setDrawColor({0x7f, 0xff, 0x7f});
 
-  SDL_Event event;
+  auto event = Event{};
+
   bool quit = false;
   while (quit == false) {
     renderer.clear();
@@ -33,8 +34,8 @@ auto main() -> int {
 
     renderer.present();
 
-    while (SDL_PollEvent(&event)) {
-      if (event.type == SDL_QUIT) {
+    while (event.pollEvent()) {
+      if (event.type() == Event::QUIT) {
         quit = true;
       }
     }

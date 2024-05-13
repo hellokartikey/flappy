@@ -11,6 +11,8 @@ class Renderer;
 class Surface;
 class Texture;
 
+class Event;
+
 class SDL_ttf;
 class Font;
 }  // namespace hk::sdl

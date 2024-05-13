@@ -1,15 +1,15 @@
 #include "renderer.h"
 
 #include "color.h"
+#include "logger.h"
 #include "rectangle.h"
 #include "surface.h"
 #include "texture.h"
-#include "logger.h"
 #include "window.h"
 
 using namespace hk::sdl;
 
-Renderer::Renderer(Window& window, std::int32_t index, std::uint32_t flags) {
+Renderer::Renderer(Window& window, std::int32_t index, Flag flags) {
   m_renderer = SDL_CreateRenderer(window.get(), index, flags);
 
   if (m_renderer == nullptr) {

@@ -6,7 +6,7 @@
 using namespace hk::sdl;
 
 Window::Window(const std::string_view& title, hk::math::Vector2i size,
-               hk::math::Vector2i pos, std::uint32_t flags) {
+               hk::math::Vector2i pos, Flag flags) {
   m_window_ptr = SDL_CreateWindow(title.data(), pos.x(), pos.y(), size.x(),
                                   size.y(), flags);
   if (m_window_ptr == nullptr) {

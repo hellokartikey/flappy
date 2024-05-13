@@ -11,17 +11,17 @@
 #include "rectangle.h"
 
 namespace hk::sdl {
-namespace renderer {
-constexpr std::uint32_t SOFTWARE = SDL_RENDERER_SOFTWARE,
-                        ACCELERATED = SDL_RENDERER_ACCELERATED,
-                        PRESENTVSYNC = SDL_RENDERER_PRESENTVSYNC,
-                        TARGETTEXTURE = SDL_RENDERER_TARGETTEXTURE;
-}
-
 class Renderer {
  public:
+  enum Flag {
+    SOFTWARE = SDL_RENDERER_SOFTWARE,
+    ACCELERATED = SDL_RENDERER_ACCELERATED,
+    PRESENTVSYNC = SDL_RENDERER_PRESENTVSYNC,
+    TARGETTEXTURE = SDL_RENDERER_TARGETTEXTURE
+  };
+
   Renderer(Window& window, std::int32_t index = -1,
-           std::uint32_t flags = renderer::ACCELERATED);
+           Flag flags = Flag::ACCELERATED);
 
   Renderer(SDL_Renderer* renderer);
 

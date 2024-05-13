@@ -18,7 +18,8 @@ add_executable(flappy)
 
 target_compile_definitions(
   flappy
-  PUBLIC RESOURCE="${CMAKE_CURRENT_SOURCE_DIR}/resources"
+  PUBLIC RESOURCE="${CMAKE_CURRENT_SOURCE_DIR}/resources/"
+  PUBLIC FONT="${CMAKE_CURRENT_SOURCE_DIR}/resources/fonts/"
 )
 
 add_subdirectory(src)

@@ -16,6 +16,7 @@ target_sources(
   PRIVATE font.h      PRIVATE font.cc
   PRIVATE color.h     PRIVATE color.cc
   PRIVATE rectangle.h PRIVATE rectangle.cc
+  PRIVATE event.h     PRIVATE event.cc
   PRIVATE math.h
 )
 
