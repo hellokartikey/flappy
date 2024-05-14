@@ -9,8 +9,7 @@
 
 using namespace hk::sdl;
 
-Font::Font(const std::string_view& name)
-    : m_name(name), m_size(24), Entity(name) {
+Font::Font(std::string_view name, std::int32_t size) : m_name(name), m_size(size), Entity(name) {
   m_font = TTF_OpenFont(getFilePath().data(), m_size);
 
   if (m_font == nullptr) {
@@ -40,7 +39,7 @@ auto Font::get() -> TTF_Font* { return m_font; }
 
 Font::operator TTF_Font*() { return m_font; }
 
-auto Font::renderTextSolid(const std::string_view& text,
+auto Font::renderTextSolid(std::string_view text,
                            const Color& color) -> Surface {
   return Surface{TTF_RenderText_Solid(*this, text.data(), color),
                  no_logging_tag};

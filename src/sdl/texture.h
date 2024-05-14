@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 
+#include <memory>
 #include <stdexcept>
 
 #include "fwd.h"
@@ -10,8 +11,8 @@
 namespace hk::sdl {
 class Texture {
  public:
-  Texture(Renderer& renderer, Surface& surface);
-  Texture(Renderer& renderer, Surface& surface, no_logging_tag_t);
+  Texture(Window& window, Surface& surface);
+  Texture(Window& window, Surface& surface, no_logging_tag_t);
 
   ~Texture();
 
@@ -21,8 +22,10 @@ class Texture {
 
  private:
   SDL_Texture* m_texture;
-  bool m_log;
+bool m_log;
 };
+
+using Texture_ptr = std::shared_ptr<Texture>;
 }  // namespace hk::sdl
 
 #endif

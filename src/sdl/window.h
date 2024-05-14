@@ -4,14 +4,17 @@
 #include <SDL2/SDL.h>
 
 #include <cstdint>
+#include <memory>
 #include <stdexcept>
 #include <string_view>
 
+#include "entity.h"
 #include "fwd.h"
 #include "math.h"
+#include "rectangle.h"
 
 namespace hk::sdl {
-class Window {
+class Window : public Entity {
  public:
   static constexpr hk::math::Vector2i CENTERED{SDL_WINDOWPOS_CENTERED,
                                                SDL_WINDOWPOS_CENTERED};
@@ -34,20 +37,39 @@ class Window {
     SHOWN = SDL_WINDOW_SHOWN
   };
 
-  Window(const std::string_view& title, hk::math::Vector2i size,
-         hk::math::Vector2i pos = CENTERED, Flag flags = SHOWN);
+  enum Renderer {
+    SOFTWARE = SDL_RENDERER_SOFTWARE,
+    ACCELERATED = SDL_RENDERER_ACCELERATED,
+    PRESENTVSYNC = SDL_RENDERER_PRESENTVSYNC,
+    TARGETTEXTURE = SDL_RENDERER_TARGETTEXTURE
+  };
 
-  Window(SDL_Window* window);
+  Window(std::string_view name, hk::math::Vector2i size,
+         hk::math::Vector2i pos = CENTERED, Flag flags = SHOWN,
+         Renderer renderer = ACCELERATED, std::int32_t index = -1);
 
   ~Window();
 
   auto get() -> SDL_Window*;
 
   operator SDL_Window*();
+  operator SDL_Renderer*();
+
+  auto present() -> void;
+
+  auto clear() -> void;
+
+  auto setDrawColor(const Color& color) -> void;
+
+  auto copy(Texture& texture, Rectangle_opt src = std::nullopt,
+            Rectangle_opt dst = std::nullopt) -> void;
 
  private:
-  SDL_Window* m_window_ptr = nullptr;
+  SDL_Window* m_window;
+  SDL_Renderer* m_renderer;
 };
+
+using Window_ptr = std::shared_ptr<Window>;
 }  // namespace hk::sdl
 
 #endif

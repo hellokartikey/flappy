@@ -9,7 +9,6 @@
 #include "loader.h"
 #include "math.h"
 #include "rectangle.h"
-#include "renderer.h"
 #include "sdl.h"
 #include "sdl_ttf.h"
 #include "surface.h"

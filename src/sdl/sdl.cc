@@ -4,7 +4,7 @@
 
 using namespace hk::sdl;
 
-SDL::SDL(Flag flags) : Entity("SDL") {
+SDL::SDL(std::string_view name, Flag flags) : Entity(name) {
   if (SDL_Init(flags) != 0) {
     throw std::runtime_error(SDL_GetError());
   }

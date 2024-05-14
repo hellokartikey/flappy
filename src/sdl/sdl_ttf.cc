@@ -4,7 +4,7 @@
 
 using namespace hk::sdl;
 
-TTF::TTF() : Entity("TTF") {
+TTF::TTF(std::string_view name) : Entity(name) {
   if (TTF_Init()) {
     throw std::runtime_error(TTF_GetError());
   }

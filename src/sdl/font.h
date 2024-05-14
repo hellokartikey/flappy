@@ -16,7 +16,7 @@ const std::string FONT_PREFIX{FONT};
 
 class Font : public Entity {
  public:
-  Font(const std::string_view& name);
+  Font(std::string_view name, std::int32_t size = 24);
 
   ~Font();
 
@@ -29,14 +29,15 @@ class Font : public Entity {
 
   operator TTF_Font*();
 
-  auto renderTextSolid(const std::string_view& text,
-                       const Color& color) -> Surface;
+  auto renderTextSolid(std::string_view text, const Color& color) -> Surface;
 
  private:
   std::string_view m_name;
   std::int32_t m_size;
   TTF_Font* m_font;
 };
+
+using Font_ptr = std::shared_ptr<Font>;
 }  // namespace hk::sdl
 
 #endif

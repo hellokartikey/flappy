@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 
 #include <cstdint>
+#include <memory>
 #include <stdexcept>
 
 #include "entity.h"
@@ -24,9 +25,11 @@ class SDL : public Entity {
     NOPARACHUTE = SDL_INIT_NOPARACHUTE
   };
 
-  SDL(Flag flags = SDL::EVERYTHING);
+  SDL(std::string_view name = "SDL", Flag flags = SDL::EVERYTHING);
   ~SDL();
 };
+
+using SDL_ptr = std::shared_ptr<SDL>;
 }  // namespace hk::sdl
 
 #endif

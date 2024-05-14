@@ -10,7 +10,6 @@ target_sources(
   PRIVATE entity.h    PRIVATE entity.cc
   PRIVATE loader.h    PRIVATE loader.cc
   PRIVATE sdl.h       PRIVATE sdl.cc
-  PRIVATE renderer.h  PRIVATE renderer.cc
   PRIVATE window.h    PRIVATE window.cc
   PRIVATE surface.h   PRIVATE surface.cc
   PRIVATE texture.h   PRIVATE texture.cc

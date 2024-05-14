@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 
 #include <cstdint>
+#include <memory>
 #include <stdexcept>
 
 #include "fwd.h"
@@ -28,6 +29,8 @@ class Surface {
   SDL_Surface* m_surface;
   bool m_log;
 };
+
+using Surface_ptr = std::shared_ptr<Surface>;
 }  // namespace hk::sdl
 
 #endif

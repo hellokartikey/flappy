@@ -2,19 +2,19 @@
 
 #include "global.h"
 #include "logger.h"
-#include "renderer.h"
 #include "surface.h"
+#include "window.h"
 
 using namespace hk::sdl;
 
-Texture::Texture(Renderer& renderer, Surface& surface)
-    : Texture(renderer, surface, no_logging_tag) {
+Texture::Texture(Window& window, Surface& surface)
+    : Texture(window, surface, no_logging_tag) {
   m_log = true;
   if (m_log) hk::logger::ctor("SDL_CreateTextureFromSurface() successful.");
 }
 
-Texture::Texture(Renderer& renderer, Surface& surface, no_logging_tag_t)
-    : m_texture(SDL_CreateTextureFromSurface(renderer, surface)) {}
+Texture::Texture(Window& window, Surface& surface, no_logging_tag_t)
+    : m_texture(SDL_CreateTextureFromSurface(window, surface)) {}
 
 Texture::~Texture() {
   SDL_DestroyTexture(m_texture);

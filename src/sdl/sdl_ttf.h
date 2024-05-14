@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL_ttf.h>
 
+#include <memory>
 #include <stdexcept>
 #include <string_view>
 
@@ -12,10 +13,12 @@
 namespace hk::sdl {
 class TTF : public Entity {
  public:
-  TTF();
+  TTF(std::string_view name = "TTF");
 
   ~TTF();
 };
+
+using TTF_ptr = std::shared_ptr<TTF>;
 }  // namespace hk::sdl
 
 #endif

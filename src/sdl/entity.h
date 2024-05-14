@@ -19,6 +19,9 @@ class Entity {
  private:
   std::string_view m_name;
 };
+
+using Entity_ptr = std::shared_ptr<Entity>;
+using Entity_weak_ptr = std::weak_ptr<Entity>;
 }  // namespace hk::sdl
 
 #endif

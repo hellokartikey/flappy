@@ -12,12 +12,12 @@ using namespace hk::math;
 using namespace std::chrono_literals;
 
 auto main() -> int {
-  auto sdl = Loader::loadSDL(SDL::VIDEO);
+  auto sdl = Loader::loadSDL();
   auto ttf = Loader::loadTTF();
 
   auto font = Loader::loadFont("Square.ttf");
-  auto window = Window("[DEMO] Flappy Bird :)", {640, 480});
-  auto renderer = Renderer{window};
+
+  auto window = Loader::loadWindow("[DEMO] Flappy Bird :)", {640, 480});
   auto event = Event{};
 
   auto fps = 0s;
@@ -28,21 +28,21 @@ auto main() -> int {
 
     auto start = getTicks();
 
-    renderer.clear();
+    window->clear();
 
     // Begin rendering stuff
     auto text = font->renderTextSolid(fmt::format("{}fps", fps.count()),
                                       {0x00, 0x00, 0x00});
-    auto text_texture = Texture(renderer, text, no_logging_tag);
+    auto text_texture = Texture(*window, text, no_logging_tag);
 
     auto dst = Rectangle{0, 0, text.w(), text.h()};
 
-    renderer.setDrawColor({0x7f, 0xff, 0x7f});
+    window->setDrawColor({0x7f, 0xff, 0x7f});
 
-    renderer.copy(text_texture, std::nullopt, dst);
+    window->copy(text_texture, std::nullopt, dst);
     // End rendering stuff
 
-    renderer.present();
+    window->present();
 
     while (event.pollEvent()) {
       if (event.type() == Event::QUIT) {
