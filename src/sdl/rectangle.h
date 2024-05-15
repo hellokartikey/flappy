@@ -8,11 +8,13 @@
 #include <stdexcept>
 
 #include "fwd.h"
+#include "math.h"
 
 namespace hk::sdl {
 class Rectangle {
  public:
-  Rectangle(std::int32_t x, std::int32_t y, std::int32_t w, std::int32_t h);
+  Rectangle(u32 x, u32 y, u32 w, u32 h);
+  Rectangle(hk::math::Vector2i top_left, hk::math::Vector2i size);
 
   Rectangle(SDL_Rect rect);
 

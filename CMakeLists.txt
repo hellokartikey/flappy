@@ -16,6 +16,7 @@ find_package(fmt REQUIRED)
 
 set(RESOURCE "${CMAKE_CURRENT_SOURCE_DIR}/resources/")
 set(FONT "${CMAKE_CURRENT_SOURCE_DIR}/resources/fonts/")
+set(SPRITE "${CMAKE_CURRENT_SOURCE_DIR}/resources/sprites/")
 
 add_executable(flappy)
 

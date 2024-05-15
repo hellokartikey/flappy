@@ -17,9 +17,9 @@ class Surface {
 
   ~Surface();
 
-  auto w() const -> std::int32_t;
+  auto w() const -> u32;
 
-  auto h() const -> std::int32_t;
+  auto h() const -> u32;
 
   auto get() -> SDL_Surface*;
 

@@ -2,6 +2,7 @@
 #define SDL_WRAPPER_CORE_H
 
 #include "color.h"
+#include "engine.h"
 #include "event.h"
 #include "font.h"
 #include "fwd.h"

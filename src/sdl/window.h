@@ -46,11 +46,12 @@ class Window : public Entity {
 
   Window(std::string_view name, hk::math::Vector2i size,
          hk::math::Vector2i pos = CENTERED, Flag flags = SHOWN,
-         Renderer renderer = ACCELERATED, std::int32_t index = -1);
+         Renderer renderer = ACCELERATED, u32 index = 1);
 
   ~Window();
 
   auto get() -> SDL_Window*;
+  auto getr() -> SDL_Renderer*;
 
   operator SDL_Window*();
   operator SDL_Renderer*();
@@ -60,9 +61,6 @@ class Window : public Entity {
   auto clear() -> void;
 
   auto setDrawColor(const Color& color) -> void;
-
-  auto copy(Texture& texture, Rectangle_opt src = std::nullopt,
-            Rectangle_opt dst = std::nullopt) -> void;
 
  private:
   SDL_Window* m_window;

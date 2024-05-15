@@ -16,8 +16,13 @@ class Entity {
 
   auto name() const -> std::string;
 
+  auto id() const -> u64;
+
  private:
   std::string_view m_name;
+  u64 m_id;
+
+  static u64 id_count;
 };
 
 using Entity_ptr = std::shared_ptr<Entity>;

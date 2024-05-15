@@ -7,12 +7,14 @@ target_sources(
   PRIVATE core.h
   PRIVATE fwd.h
   PRIVATE logger.h
+  PRIVATE engine.h    PRIVATE engine.cc
   PRIVATE entity.h    PRIVATE entity.cc
   PRIVATE loader.h    PRIVATE loader.cc
   PRIVATE sdl.h       PRIVATE sdl.cc
   PRIVATE window.h    PRIVATE window.cc
   PRIVATE surface.h   PRIVATE surface.cc
   PRIVATE texture.h   PRIVATE texture.cc
+  PRIVATE sdl_image.h PRIVATE sdl_image.cc
   PRIVATE sdl_ttf.h   PRIVATE sdl_ttf.cc
   PRIVATE font.h      PRIVATE font.cc
   PRIVATE global.h    PRIVATE global.cc
@@ -26,6 +28,7 @@ target_compile_definitions(
   sdl_wrapper
   PUBLIC RESOURCE="${RESOURCE}"
   PUBLIC FONT="${FONT}"
+  PUBLIC SPRITE="${SPRITE}"
 )
 
 target_link_libraries(

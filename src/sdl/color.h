@@ -10,7 +10,7 @@
 namespace hk::sdl {
 class Color {
  public:
-  using color_t = std::uint8_t;
+  using color_t = u8;
 
   Color();
   Color(color_t r, color_t g, color_t b, color_t a = 0xff);

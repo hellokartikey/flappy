@@ -12,7 +12,7 @@ class Vector2 {
   constexpr Vector2() = default;
   constexpr Vector2(T x, T y) : m_x(x), m_y(y) {}
 
-  constexpr ~Vector2() = default;
+  ~Vector2() = default;
 
   constexpr auto x() -> T& { return m_x; }
   constexpr auto x() const -> T { return m_x; }
@@ -44,8 +44,8 @@ std::ostream& operator<<(std::ostream& os, const Vector2<T>& obj) {
   return os;
 }
 
-using Vector2f = Vector2<float>;
-using Vector2i = Vector2<std::int32_t>;
+using Vector2f = Vector2<sdl::f32>;
+using Vector2i = Vector2<sdl::u32>;
 }  // namespace hk::math
 
 template <typename T>

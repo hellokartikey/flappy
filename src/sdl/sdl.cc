@@ -9,10 +9,10 @@ SDL::SDL(std::string_view name, Flag flags) : Entity(name) {
     throw std::runtime_error(SDL_GetError());
   }
 
-  hk::logger::ctor("SDL_Init() successful.");
+  hk::logger::ctor("({}) SDL_Init() successful.", Entity::id());
 }
 
 SDL::~SDL() {
   SDL_Quit();
-  hk::logger::dtor("SDL_Quit() successful.");
+  hk::logger::dtor("({}) SDL_Quit() successful.", Entity::id());
 }

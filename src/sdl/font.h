@@ -12,18 +12,18 @@
 #include "fwd.h"
 
 namespace hk::sdl {
-const std::string FONT_PREFIX{FONT};
+const auto FONT_PREFIX = std::string{FONT};
 
 class Font : public Entity {
  public:
-  Font(std::string_view name, std::int32_t size = 24);
+  Font(std::string_view name, u32 size = 24);
 
   ~Font();
 
   auto getFilePath() const -> std::string;
 
-  auto size() const -> std::int32_t;
-  auto setSize(std::int32_t size) -> void;
+  auto size() const -> u32;
+  auto setSize(u32 size) -> void;
 
   auto get() -> TTF_Font*;
 
@@ -32,8 +32,7 @@ class Font : public Entity {
   auto renderTextSolid(std::string_view text, const Color& color) -> Surface;
 
  private:
-  std::string_view m_name;
-  std::int32_t m_size;
+  u32 m_size;
   TTF_Font* m_font;
 };
 

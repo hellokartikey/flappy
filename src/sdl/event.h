@@ -5,11 +5,14 @@
 #include <SDL2/SDL_events.h>
 
 #include <cstdint>
+#include <string_view>
 
+#include "entity.h"
+#include "event.h"
 #include "fwd.h"
 
 namespace hk::sdl {
-class Event {
+class Event : public Entity {
  public:
   enum Type {
     FIRSTEVENT = SDL_FIRSTEVENT,
@@ -101,8 +104,8 @@ class Event {
     LASTEVENT = SDL_LASTEVENT
   };
 
-  Event() = default;
-  ~Event() = default;
+  Event(std::string_view name);
+  ~Event();
 
   auto type() const -> Type;
 
@@ -111,6 +114,8 @@ class Event {
  private:
   SDL_Event m_event;
 };
+
+using Event_ptr = std::shared_ptr<Event>;
 }  // namespace hk::sdl
 
 #endif

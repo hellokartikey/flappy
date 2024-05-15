@@ -18,9 +18,9 @@ Surface::~Surface() {
   if (m_log) hk::logger::dtor("SDL_FreeSurface() successful.");
 }
 
-auto Surface::w() const -> std::int32_t { return m_surface->w; }
+auto Surface::w() const -> u32 { return m_surface->w; }
 
-auto Surface::h() const -> std::int32_t { return m_surface->h; }
+auto Surface::h() const -> u32 { return m_surface->h; }
 
 auto Surface::get() -> SDL_Surface* { return m_surface; }
 

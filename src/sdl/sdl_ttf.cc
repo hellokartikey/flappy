@@ -9,11 +9,11 @@ TTF::TTF(std::string_view name) : Entity(name) {
     throw std::runtime_error(TTF_GetError());
   }
 
-  hk::logger::ctor("TTF_Init() successful.");
+  hk::logger::ctor("({}) TTF_Init() successful.", Entity::id());
 }
 
 TTF::~TTF() {
   TTF_Quit();
 
-  hk::logger::dtor("TTF_Quit() successful.");
+  hk::logger::dtor("({}) TTF_Quit() successful.", Entity::id());
 }

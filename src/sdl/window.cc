@@ -10,8 +10,7 @@
 using namespace hk::sdl;
 
 Window::Window(std::string_view name, hk::math::Vector2i size,
-               hk::math::Vector2i pos, Flag flags, Renderer renderer,
-               std::int32_t index)
+               hk::math::Vector2i pos, Flag flags, Renderer renderer, u32 index)
     : Entity(name) {
   m_window = SDL_CreateWindow(name.data(), pos.x(), pos.y(), size.x(), size.y(),
                               flags);
@@ -25,21 +24,24 @@ Window::Window(std::string_view name, hk::math::Vector2i size,
     throw std::runtime_error(SDL_GetError());
   }
 
-  hk::logger::ctor("SDL_CreateWindow() of size {}x{} successful.", size.x(),
-                   size.y());
+  hk::logger::ctor("({}) SDL_CreateWindow({}x{}) successful.", Entity::id(),
+                   size.x(), size.y());
 
-  hk::logger::ctor("SDL_CreateRenderer() with index = {} successful.", index);
+  hk::logger::ctor("({}) SDL_CreateRenderer(idx={}) successful.", Entity::id(),
+                   index);
 }
 
 Window::~Window() {
   SDL_DestroyRenderer(m_renderer);
-  hk::logger::dtor("SDL_DestroyRenderer() successful.");
+  hk::logger::dtor("({}) SDL_DestroyRenderer() successful.", Entity::id());
 
   SDL_DestroyWindow(m_window);
-  hk::logger::dtor("SDL_DestroyWindow() successful.");
+  hk::logger::dtor("({}) SDL_DestroyWindow() successful.", Entity::id());
 }
 
 auto Window::get() -> SDL_Window* { return m_window; }
+
+auto Window::getr() -> SDL_Renderer* { return m_renderer; }
 
 Window::operator SDL_Window*() { return m_window; }
 
@@ -56,14 +58,6 @@ auto Window::clear() -> void {
 auto Window::setDrawColor(const Color& color) -> void {
   if (SDL_SetRenderDrawColor(m_renderer, color.r(), color.g(), color.b(),
                              color.a())) {
-    throw std::runtime_error(SDL_GetError());
-  }
-}
-
-auto Window::copy(Texture& texture, Rectangle_opt src,
-                  Rectangle_opt dst) -> void {
-  if (SDL_RenderCopy(m_renderer, texture.get(), src ? (*src).get() : nullptr,
-                     dst ? (*dst).get() : nullptr)) {
     throw std::runtime_error(SDL_GetError());
   }
 }

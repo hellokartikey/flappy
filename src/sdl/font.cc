@@ -9,28 +9,30 @@
 
 using namespace hk::sdl;
 
-Font::Font(std::string_view name, std::int32_t size) : m_name(name), m_size(size), Entity(name) {
+Font::Font(std::string_view name, u32 size) : Entity(name), m_size(size) {
   m_font = TTF_OpenFont(getFilePath().data(), m_size);
 
   if (m_font == nullptr) {
     throw std::runtime_error(TTF_GetError());
   }
 
-  hk::logger::ctor("TTF_OpenFont() loaded {} at {}pt", name, m_size);
+  hk::logger::ctor("({}) TTF_OpenFont({}, {}pt) successful.", Entity::id(),
+                   name, m_size);
 }
 
 Font::~Font() {
   TTF_CloseFont(m_font);
-  hk::logger::dtor("TTF_CloseFont() closing {} successful.", m_name);
+  hk::logger::dtor("({}) TTF_CloseFont({}) successful.", Entity::id(),
+                   Entity::name());
 }
 
 auto Font::getFilePath() const -> std::string {
-  return FONT_PREFIX + std::string(m_name);
+  return FONT_PREFIX + std::string(Entity::name());
 }
 
-auto Font::size() const -> std::int32_t { return m_size; }
+auto Font::size() const -> u32 { return m_size; }
 
-auto Font::setSize(std::int32_t size) -> void {
+auto Font::setSize(u32 size) -> void {
   m_size = size;
   TTF_SetFontSize(m_font, m_size);
 }
