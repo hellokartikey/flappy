@@ -39,7 +39,7 @@ class Texture : public Entity {
   auto copy(Rectangle_opt src = std::nullopt,
             Rectangle_opt dst = std::nullopt) -> void;
 
-  auto size() -> hk::math::Vector2i;
+  auto size() -> hk::Vector2i;
 
  private:
   Window_ptr m_window;

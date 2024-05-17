@@ -16,10 +16,10 @@
 namespace hk::sdl {
 class Window : public Entity {
  public:
-  static constexpr hk::math::Vector2i CENTERED{SDL_WINDOWPOS_CENTERED,
-                                               SDL_WINDOWPOS_CENTERED};
-  static constexpr hk::math::Vector2i UNDEFINED{SDL_WINDOWPOS_UNDEFINED,
-                                                SDL_WINDOWPOS_UNDEFINED};
+  static constexpr hk::Vector2i CENTERED{SDL_WINDOWPOS_CENTERED,
+                                         SDL_WINDOWPOS_CENTERED};
+  static constexpr hk::Vector2i UNDEFINED{SDL_WINDOWPOS_UNDEFINED,
+                                          SDL_WINDOWPOS_UNDEFINED};
 
   enum Flag {
     FULLSCREEN = SDL_WINDOW_FULLSCREEN,
@@ -44,9 +44,8 @@ class Window : public Entity {
     TARGETTEXTURE = SDL_RENDERER_TARGETTEXTURE
   };
 
-  Window(std::string_view name, hk::math::Vector2i size,
-         hk::math::Vector2i pos = CENTERED, Flag flags = SHOWN,
-         Renderer renderer = ACCELERATED, u32 index = 1);
+  Window(std::string_view name, hk::Vector2i size, hk::Vector2i pos = CENTERED,
+         Flag flags = SHOWN, Renderer renderer = ACCELERATED, u32 index = 1);
 
   ~Window();
 

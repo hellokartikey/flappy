@@ -1,18 +1,26 @@
 #include "engine.h"
 
-using namespace hk::sdl;
+#include <chrono>
+#include <thread>
 
-Engine::Engine(std::string_view name, math::Vector2i size)
-    : m_sdl(Loader::loadSDL()),
-      m_img(Loader::loadIMG()),
-      m_ttf(Loader::loadTTF()),
+using namespace hk;
+
+using std::chrono::duration_cast;
+
+Engine::Engine(std::string_view name, hk::Vector2i size)
+    : m_sdl(sdl::Loader::loadSDL()),
+      m_img(sdl::Loader::loadIMG()),
+      m_ttf(sdl::Loader::loadTTF()),
       m_quit(false),
-      m_window(Loader::loadWindow(name, size)),
+      m_window(sdl::Loader::loadWindow(name, size)),
       m_fps_color({0x00, 0x00, 0x00}),
-      m_fps_font(Loader::loadFont("Square.ttf")),
+      m_fps_font(sdl::Loader::loadFont("Square.ttf")),
       m_fps_show(false),
-      m_fps(0.0),
-      m_event(Loader::loadEvent()) {}
+      m_fps(0),
+      m_fps_fixed(0),
+      m_fixed_delta_time(0),
+      m_delta_time(0),
+      m_event(sdl::Loader::loadEvent()) {}
 
 Engine::~Engine() {}
 
@@ -32,7 +40,7 @@ auto Engine::gameLoop() -> void { while (!eventLoop()); }
 
 auto Engine::baseEventsUpdate() -> void {
   while (m_event->pollEvent()) {
-    if (m_event->type() == Event::QUIT) {
+    if (m_event->type() == sdl::Event::QUIT) {
       m_quit = true;
     }
 
@@ -55,14 +63,21 @@ auto Engine::baseRenderUpdate() -> void {
 }
 
 auto Engine::baseBeginUpdate() -> void {
-  m_fps_start = getTicks();
+  m_fps_start = clock::now();
+
+  m_wait_time =
+      m_fps_start + duration_cast<std::chrono::milliseconds>(fixedDeltaTime());
 
   beginUpdate();
 }
 
 auto Engine::baseEndUpdate() -> void {
-  setDeltaTime(getTicks() - m_fps_start);
-  setFps(1.0 / f64(deltaTime().count()));
+  std::this_thread::sleep_until(m_wait_time);
+
+  auto delta = clock::now() - m_fps_start;
+  setDeltaTime(duration_cast<milliseconds>(delta));
+
+  setFps(seconds{1} / deltaTime());
 
   endUpdate();
 }
@@ -77,11 +92,11 @@ auto Engine::beginUpdate() -> void {}
 
 auto Engine::endUpdate() -> void {}
 
-auto Engine::fps() const -> f64 { return m_fps; }
+auto Engine::fps() const -> u32 { return m_fps; }
 
 auto Engine::isFps() const -> bool { return m_fps_show; }
 
-auto Engine::setFps(f64 fps) -> void { m_fps = fps; }
+auto Engine::setFps(u32 fps) -> void { m_fps = fps; }
 
 auto Engine::showFps() -> void { m_fps_show = true; }
 
@@ -91,24 +106,38 @@ auto Engine::renderFps() -> void {
   auto text =
       fpsFont()->renderTextSolid(fmt::format("{}fps", fps()), fpsColor());
 
-  auto text_texture = Texture("stack", m_window, text, no_logging_tag);
-  auto dst = Rectangle{0, 0, text.w(), text.h()};
+  auto text_texture =
+      sdl::Texture("stack", m_window, text, sdl::no_logging_tag);
+  auto dst = sdl::Rectangle{0, 0, text.w(), text.h()};
   text_texture.copy(std::nullopt, dst);
 }
 
-auto Engine::fpsColor() const -> Color { return m_fps_color; }
+auto Engine::fpsColor() const -> sdl::Color { return m_fps_color; }
 
-auto Engine::setFpsColor(Color color) -> void { m_fps_color = color; }
+auto Engine::setFpsColor(sdl::Color color) -> void { m_fps_color = color; }
 
-auto Engine::fpsFont() -> Font_ptr { return m_fps_font; }
+auto Engine::fpsFont() -> sdl::Font_ptr { return m_fps_font; }
 
-auto Engine::deltaTime() -> std::chrono::milliseconds { return m_delta_time; }
+auto Engine::fixedFps() const -> u32 { return m_fps_fixed; }
 
-auto Engine::setDeltaTime(std::chrono::milliseconds dt) -> void {
-  m_delta_time = dt;
+auto Engine::setFixedFps(u32 fps) -> void {
+  m_fps_fixed = fps;
+  if (m_fps_fixed) {
+    m_fixed_delta_time = milliseconds{1000} / fixedFps();
+  } else {
+    m_fixed_delta_time = milliseconds{0};
+  }
 }
 
-auto Engine::window() -> Window_ptr { return m_window; }
+auto Engine::deltaTime() -> milliseconds { return m_delta_time; }
+
+auto Engine::setDeltaTime(milliseconds dt) -> void { m_delta_time = dt; }
+
+auto Engine::fixedDeltaTime() -> milliseconds { return m_fixed_delta_time; }
+
+auto Engine::window() -> sdl::Window_ptr { return m_window; }
+
+auto Engine::event() -> sdl::Event_ptr { return m_event; }
 
 auto Engine::isQuit() const -> bool { return m_quit; }
 

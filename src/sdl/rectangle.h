@@ -14,7 +14,7 @@ namespace hk::sdl {
 class Rectangle {
  public:
   Rectangle(u32 x, u32 y, u32 w, u32 h);
-  Rectangle(hk::math::Vector2i top_left, hk::math::Vector2i size);
+  Rectangle(hk::Vector2i top_left, hk::Vector2i size);
 
   Rectangle(SDL_Rect rect);
 

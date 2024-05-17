@@ -33,7 +33,7 @@ class Loader {
 
   static auto loadSDL(std::string_view name = "SDL") -> SDL_ptr;
 
-  static auto loadWindow(std::string_view name, hk::math::Vector2i size,
+  static auto loadWindow(std::string_view name, hk::Vector2i size,
                          u32 index = 1) -> Window_ptr;
 
   static auto loadIMG(std::string_view name = "IMG") -> IMG_ptr;
@@ -66,7 +66,7 @@ class Loader {
 
   static IMG::Flag img_flags;
 
-  static hk::math::Vector2i window_position;
+  static hk::Vector2i window_position;
   static Window::Flag window_flags;
   static Window::Renderer renderer;
 

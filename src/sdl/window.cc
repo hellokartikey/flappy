@@ -9,8 +9,8 @@
 
 using namespace hk::sdl;
 
-Window::Window(std::string_view name, hk::math::Vector2i size,
-               hk::math::Vector2i pos, Flag flags, Renderer renderer, u32 index)
+Window::Window(std::string_view name, hk::Vector2i size, hk::Vector2i pos,
+               Flag flags, Renderer renderer, u32 index)
     : Entity(name) {
   m_window = SDL_CreateWindow(name.data(), pos.x(), pos.y(), size.x(), size.y(),
                               flags);

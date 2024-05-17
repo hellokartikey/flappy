@@ -5,7 +5,7 @@
 
 #include <iosfwd>
 
-namespace hk::math {
+namespace hk {
 template <typename T>
 class Vector2 {
  public:
@@ -44,11 +44,11 @@ std::ostream& operator<<(std::ostream& os, const Vector2<T>& obj) {
   return os;
 }
 
-using Vector2f = Vector2<sdl::f32>;
-using Vector2i = Vector2<sdl::u32>;
-}  // namespace hk::math
+using Vector2f = Vector2<f32>;
+using Vector2i = Vector2<u32>;
+}  // namespace hk
 
 template <typename T>
-struct fmt::formatter<hk::math::Vector2<T>> : ostream_formatter {};
+struct fmt::formatter<hk::Vector2<T>> : ostream_formatter {};
 
 #endif

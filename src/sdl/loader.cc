@@ -23,7 +23,7 @@ auto Loader::loadSDL(std::string_view name) -> SDL_ptr {
   return Loader::loadGeneric<SDL>(name, Loader::sdl_flags);
 }
 
-auto Loader::loadWindow(std::string_view name, hk::math::Vector2i size,
+auto Loader::loadWindow(std::string_view name, hk::Vector2i size,
                         u32 index) -> Window_ptr {
   return Loader::loadGeneric<Window>(name, size, Loader::window_position,
                                      Loader::window_flags, Loader::renderer,

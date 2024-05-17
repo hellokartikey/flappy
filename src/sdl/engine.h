@@ -2,7 +2,7 @@
 #define SDL_WRAPPER_ENGINE_H
 
 #include <chrono>
-#include <ratio>
+#include <thread>
 
 #include "color.h"
 #include "font.h"
@@ -17,15 +17,22 @@
 #include "surface.h"
 #include "window.h"
 
-namespace hk::sdl {
+namespace hk {
 class Engine {
+ protected:
+  using milliseconds = std::chrono::duration<f32, std::milli>;
+  using seconds = std::chrono::duration<f32>;
+  using clock = std::chrono::high_resolution_clock;
+  using time_point = std::chrono::time_point<clock>;
+
  public:
-  Engine(std::string_view name, math::Vector2i size);
+  auto gameLoop() -> void;
+
+ protected:
+  Engine(std::string_view name, hk::Vector2i size);
   ~Engine();
 
   auto eventLoop() -> bool;
-
-  auto gameLoop() -> void;
 
   auto baseEventsUpdate() -> void;
   auto basePhysicsUpdate() -> void;
@@ -41,46 +48,56 @@ class Engine {
   virtual auto beginUpdate() -> void;
   virtual auto endUpdate() -> void;
 
-  auto fps() const -> f64;
+  auto fps() const -> u32;
   auto isFps() const -> bool;
   auto showFps() -> void;
   auto hideFps() -> void;
 
+  auto fixedFps() const -> u32;
+  auto setFixedFps(u32 fps) -> void;
+
   auto renderFps() -> void;
 
-  auto fpsColor() const -> Color;
-  auto setFpsColor(Color color) -> void;
+  auto fpsColor() const -> sdl::Color;
+  auto setFpsColor(sdl::Color color) -> void;
 
-  auto fpsFont() -> Font_ptr;
+  auto fpsFont() -> sdl::Font_ptr;
 
-  auto deltaTime() -> std::chrono::milliseconds;
+  auto deltaTime() -> milliseconds;
 
-  auto window() -> Window_ptr;
+  auto fixedDeltaTime() -> milliseconds;
+
+  auto window() -> sdl::Window_ptr;
+
+  auto event() -> sdl::Event_ptr;
 
   auto isQuit() const -> bool;
   auto quit() -> void;
 
  private:
-  auto setFps(f64 fps) -> void;
-  auto setDeltaTime(std::chrono::milliseconds dt) -> void;
+  auto setFps(u32 fps) -> void;
+  auto setDeltaTime(milliseconds dt) -> void;
 
- protected:
-  SDL_ptr m_sdl;
-  IMG_ptr m_img;
-  TTF_ptr m_ttf;
+  sdl::SDL_ptr m_sdl;
+  sdl::IMG_ptr m_img;
+  sdl::TTF_ptr m_ttf;
 
   bool m_quit;
 
-  Window_ptr m_window;
+  sdl::Window_ptr m_window;
 
   bool m_fps_show;
-  Font_ptr m_fps_font;
-  Color m_fps_color;
-  f64 m_fps;
-  std::chrono::milliseconds m_fps_start, m_delta_time;
+  sdl::Font_ptr m_fps_font;
+  sdl::Color m_fps_color;
+  u32 m_fps;
+  u32 m_fps_fixed;
+  time_point m_fps_start;
+  time_point m_wait_time;
+  milliseconds m_fixed_delta_time;
+  milliseconds m_delta_time;
 
-  Event_ptr m_event;
+  sdl::Event_ptr m_event;
 };
-}  // namespace hk::sdl
+}  // namespace hk
 
 #endif
