@@ -55,6 +55,7 @@ class Engine {
 
   auto fixedFps() const -> u32;
   auto setFixedFps(u32 fps) -> void;
+  auto isFixedFps() -> bool;
 
   auto renderFps() -> void;
 
@@ -75,6 +76,7 @@ class Engine {
   auto quit() -> void;
 
  private:
+  // Never use these!!!
   auto setFps(u32 fps) -> void;
   auto setDeltaTime(milliseconds dt) -> void;
 

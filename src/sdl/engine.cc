@@ -65,14 +65,18 @@ auto Engine::baseRenderUpdate() -> void {
 auto Engine::baseBeginUpdate() -> void {
   m_fps_start = clock::now();
 
-  m_wait_time =
-      m_fps_start + duration_cast<std::chrono::milliseconds>(fixedDeltaTime());
+  if (isFixedFps()) {
+    m_wait_time = m_fps_start +
+                  duration_cast<std::chrono::milliseconds>(fixedDeltaTime());
+  }
 
   beginUpdate();
 }
 
 auto Engine::baseEndUpdate() -> void {
-  std::this_thread::sleep_until(m_wait_time);
+  if (isFixedFps()) {
+    std::this_thread::sleep_until(m_wait_time);
+  }
 
   auto delta = clock::now() - m_fps_start;
   setDeltaTime(duration_cast<milliseconds>(delta));
@@ -103,8 +107,7 @@ auto Engine::showFps() -> void { m_fps_show = true; }
 auto Engine::hideFps() -> void { m_fps_show = false; }
 
 auto Engine::renderFps() -> void {
-  auto text =
-      fpsFont()->renderTextSolid(fmt::format("{}fps", fps()), fpsColor());
+  auto text = fpsFont()->renderTextSolid(fmt::format("{}", fps()), fpsColor());
 
   auto text_texture =
       sdl::Texture("stack", m_window, text, sdl::no_logging_tag);
@@ -128,6 +131,8 @@ auto Engine::setFixedFps(u32 fps) -> void {
     m_fixed_delta_time = milliseconds{0};
   }
 }
+
+auto Engine::isFixedFps() -> bool { return m_fps_fixed != 0; }
 
 auto Engine::deltaTime() -> milliseconds { return m_delta_time; }
 

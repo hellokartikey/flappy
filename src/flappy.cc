@@ -4,24 +4,22 @@
 
 Flappy::Flappy(std::string_view name, hk::Vector2i size)
     : hk::Engine(name, size),
-      m_sprite(hk::sdl::Loader::loadTexture("flappy.png", window())) {
+      m_sprite("full", hk::sdl::Loader::loadTexture("flappy.png", window()),
+               hk::sdl::Rectangle{{0, 0}, {50, 50}},
+               hk::sdl::Rectangle{{0, 0}, {50, 50}}) {
   showFps();
-  setFixedFps(60);
+
+  m_background_color = hk::sdl::Color{0x7f, 0xff, 0x7f};
+  window()->setDrawColor(m_background_color);
 }
 
-Flappy::~Flappy() {}
+Flappy::~Flappy() { fmt::print("Good bye! :D\n"); }
 
 auto Flappy::eventsUpdate() -> void {}
 
 auto Flappy::physicsUpdate() -> void {}
 
-auto Flappy::renderUpdate() -> void {
-  const auto background_color = hk::sdl::Color{0x7f, 0xff, 0x7f};
-  window()->setDrawColor(background_color);
-
-  auto dst = hk::sdl::Rectangle({0, 0}, m_sprite->size());
-  m_sprite->copy(std::nullopt, dst);
-}
+auto Flappy::renderUpdate() -> void { m_sprite.render(); }
 
 auto Flappy::beginUpdate() -> void {}
 

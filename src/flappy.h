@@ -17,7 +17,7 @@ class Flappy : public hk::Engine {
 
  private:
   hk::sdl::Color m_background_color;
-  hk::sdl::Texture_ptr m_sprite;
+  hk::sdl::Sprite m_sprite;
 };
 
 #endif

@@ -12,6 +12,7 @@
 #include "entity.h"
 #include "fwd.h"
 #include "math.h"
+#include "rectangle.h"
 #include "window.h"
 
 namespace hk::sdl {

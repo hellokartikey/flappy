@@ -17,6 +17,7 @@ target_sources(
   PRIVATE sdl_image.h PRIVATE sdl_image.cc
   PRIVATE sdl_ttf.h   PRIVATE sdl_ttf.cc
   PRIVATE font.h      PRIVATE font.cc
+  PRIVATE sprite.h    PRIVATE sprite.cc
   PRIVATE global.h    PRIVATE global.cc
   PRIVATE color.h     PRIVATE color.cc
   PRIVATE rectangle.h PRIVATE rectangle.cc
