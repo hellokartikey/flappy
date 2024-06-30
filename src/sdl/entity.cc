@@ -2,8 +2,6 @@
 
 using namespace hk::sdl;
 
-auto Entity::id_count = u64{0};
-
 Entity::Entity(std::string_view name)
     : m_name(name), m_id(Entity::id_count++) {}
 

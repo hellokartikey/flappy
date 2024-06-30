@@ -12,7 +12,7 @@ namespace hk::sdl {
 class Entity {
  public:
   explicit Entity(std::string_view name);
-  ~Entity() = default;
+  virtual ~Entity() = default;
 
   auto name() const -> std::string;
 
@@ -22,7 +22,7 @@ class Entity {
   std::string_view m_name;
   u64 m_id;
 
-  static u64 id_count;
+  static inline u64 id_count = 0;
 };
 
 using Entity_ptr = std::shared_ptr<Entity>;

@@ -2,8 +2,13 @@
 #define SDL_WRAPPER_COLOR_H
 
 #include <SDL2/SDL.h>
+#include <fmt/format.h>
+
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
 
 #include <cstdint>
+#include <string>
 
 #include "fwd.h"
 
@@ -35,5 +40,15 @@ class Color {
   color_t m_r, m_g, m_b, m_a;
 };
 }  // namespace hk::sdl
+
+template <>
+struct fmt::formatter<hk::sdl::Color> : fmt::formatter<std::string> {
+  inline auto format(const hk::sdl::Color& c, format_context& ctx) const {
+    return formatter<std::string>::format(
+        fmt::format("[Color {:02x}, {:02x}, {:02x}, {:02x}]", c.r(), c.g(),
+                    c.b(), c.a()),
+        ctx);
+  }
+};
 
 #endif

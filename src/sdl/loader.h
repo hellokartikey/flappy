@@ -43,7 +43,8 @@ class Loader {
 
   static auto loadTTF(std::string_view name = "TTF") -> TTF_ptr;
 
-  static auto loadFont(std::string_view name) -> Font_ptr;
+  static auto loadFont(std::string_view name,
+                       u32 font_size = Loader::font_size) -> Font_ptr;
 
   // Modifiers - NOT WORKING
   static auto pin(std::string_view name) -> void;
@@ -59,18 +60,18 @@ class Loader {
   static auto get(u64 id) -> Entity_ptr;
 
  public:
-  static std::unordered_map<std::string_view, Entity_weak_ptr> global;
-  static std::unordered_map<std::string_view, Entity_ptr> pinned;
+  static inline std::unordered_map<std::string_view, Entity_weak_ptr> global;
+  static inline std::unordered_map<std::string_view, Entity_ptr> pinned;
 
-  static SDL::Flag sdl_flags;
+  static inline SDL::Flag sdl_flags = SDL::VIDEO;
 
-  static IMG::Flag img_flags;
+  static inline IMG::Flag img_flags = IMG::EVERYTHING;
 
-  static hk::Vector2i window_position;
-  static Window::Flag window_flags;
-  static Window::Renderer renderer;
+  static inline hk::Vector2i window_position = Window::CENTERED;
+  static inline Window::Flag window_flags = Window::SHOWN;
+  static inline Window::Renderer renderer = Window::ACCELERATED;
 
-  static u32 font_size;
+  static inline u32 font_size = 32;
 };
 }  // namespace hk::sdl
 

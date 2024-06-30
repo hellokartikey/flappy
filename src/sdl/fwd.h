@@ -21,11 +21,14 @@ class Surface;
 class Texture;
 
 class IMG;
+class Sprite;
 
 class Event;
 
 class TTF;
 class Font;
+
+enum class JsonType { Entity, Color, Rectangle, Texture, Sprite, Font };
 }  // namespace hk::sdl
 
 namespace hk {

@@ -47,7 +47,7 @@ auto Texture::get() -> SDL_Texture* { return m_texture; }
 auto Texture::size() -> hk::Vector2i {
   i32 x = 0, y = 0;
   SDL_QueryTexture(m_texture, nullptr, nullptr, &x, &y);
-  return hk::Vector2i{static_cast<u32>(x), static_cast<u32>(y)};
+  return hk::Vector2i{x, y};
 }
 
 Texture::operator SDL_Texture*() { return m_texture; }

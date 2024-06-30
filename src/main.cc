@@ -1,4 +1,8 @@
+#include <fmt/format.h>
+#include <fmt/std.h>
+
 #include "flappy.h"
+#include "sdl/core.h"
 
 using namespace std::chrono_literals;
 

@@ -7,6 +7,7 @@
 #include "font.h"
 #include "fwd.h"
 #include "global.h"
+#include "json.h"
 #include "loader.h"
 #include "math.h"
 #include "rectangle.h"

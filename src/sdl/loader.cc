@@ -2,19 +2,6 @@
 
 using namespace hk::sdl;
 
-auto Loader::global = std::unordered_map<std::string_view, Entity_weak_ptr>{};
-auto Loader::pinned = std::unordered_map<std::string_view, Entity_ptr>{};
-
-auto Loader::sdl_flags = SDL::VIDEO;
-
-auto Loader::img_flags = IMG::EVERYTHING;
-
-auto Loader::window_position = Window::CENTERED;
-auto Loader::window_flags = Window::SHOWN;
-auto Loader::renderer = Window::ACCELERATED;
-
-auto Loader::font_size = u32{24};
-
 auto Loader::loadEvent(std::string_view name) -> Event_ptr {
   return Loader::loadGeneric<Event>(name);
 }
@@ -43,8 +30,8 @@ auto Loader::loadTTF(std::string_view name) -> TTF_ptr {
   return Loader::loadGeneric<TTF>(name);
 }
 
-auto Loader::loadFont(std::string_view name) -> Font_ptr {
-  return Loader::loadGeneric<Font>(name, Loader::font_size);
+auto Loader::loadFont(std::string_view name, u32 font_size) -> Font_ptr {
+  return Loader::loadGeneric<Font>(name, font_size);
 }
 
 auto Loader::pin(std::string_view name) -> void {

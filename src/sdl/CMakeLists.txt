@@ -22,6 +22,7 @@ target_sources(
   PRIVATE color.h     PRIVATE color.cc
   PRIVATE rectangle.h PRIVATE rectangle.cc
   PRIVATE event.h     PRIVATE event.cc
+  PRIVATE json.h      PRIVATE json.cc
   PRIVATE math.h
 )
 
@@ -38,4 +39,5 @@ target_link_libraries(
   SDL2_image::SDL2_image
   SDL2_ttf::SDL2_ttf
   fmt::fmt
+  nlohmann_json::nlohmann_json
 )

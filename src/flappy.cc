@@ -5,8 +5,7 @@
 Flappy::Flappy(std::string_view name, hk::Vector2i size)
     : hk::Engine(name, size),
       m_sprite("full", hk::sdl::Loader::loadTexture("flappy.png", window()),
-               hk::sdl::Rectangle{{0, 0}, {50, 50}},
-               hk::sdl::Rectangle{{0, 0}, {50, 50}}) {
+               hk::sdl::Rectangle{{110, 280}, {50, 50}}, hk::Vector2i{50, 50}) {
   showFps();
 
   m_background_color = hk::sdl::Color{0x7f, 0xff, 0x7f};

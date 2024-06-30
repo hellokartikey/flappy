@@ -1,7 +1,6 @@
 #include "color.h"
 
-using namespace hk::sdl;
-
+namespace hk::sdl {
 Color::Color() : m_r(0x00), m_g(0x00), m_b(0x00), m_a(0xff) {}
 
 Color::Color(color_t r, color_t g, color_t b, color_t a)
@@ -24,3 +23,4 @@ auto Color::a() -> color_t& { return m_a; }
 auto Color::a() const -> color_t { return m_a; }
 
 Color::operator SDL_Color() const { return SDL_Color{m_r, m_g, m_b, m_a}; }
+}  // namespace hk::sdl

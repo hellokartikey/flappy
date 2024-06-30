@@ -9,7 +9,8 @@
 
 using namespace hk::sdl;
 
-Font::Font(std::string_view name, u32 size) : Entity(name), m_size(size) {
+Font::Font(std::string_view name, u32 size)
+    : Entity(name), m_size(size) {
   m_font = TTF_OpenFont(getFilePath().data(), m_size);
 
   if (m_font == nullptr) {
